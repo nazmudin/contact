@@ -1,23 +1,41 @@
 <div id="table-outer">
 <table><tbody>
-<tr><td><label for="feed-order">Urutkan artikel berdasarkan:</label></td> <td><select id="feed-order"> <option selected="" value="published">Artikel terbaru</option> <option value="updated">Artikel yang terakhir di update</option> </select></td></tr>
-<tr><td><label for="label-sorter">Filter artikel berdasarkan kategori:</label></td> <td><select disabled="" id="label-sorter"> <option selected="">Loading....</option> </select></td></tr>
-<tr>                 <td><label for="feed-q">Cari artikel dengan kata kunci:</label></td> <td><form id="post-searcher">
-<input id="feed-q" type="text" placeholder="Ketik dan tekan ENTER"/>
-</form>
+<tr><td><label>Sort posts by : </label></td><td><select id="orderFeedBy"><option selected="" value="published">New post</option><option value="updated">Post updated</option></select></td></tr>
+<tr><td><label>Filter posts by category : </label></td><td><span id="labelSorter"><select disabled=""><option selected="">Loading...</option></select></span></td></tr>
+<tr><td><label>Search by keyword : </label></td><td><form id="postSearcher">
+<input type="text" /></form>
 </td></tr>
 </tbody></table>
 </div>
-<header id="result-desc"></header>
-<ul id="feed-container"></ul>
-<div id="feed-nav">
-</div>
-<script type='text/javaScript'>
-document.write;var loadToc,loadCategories,_toc={init:function(){var cfg={homePage:"theencoding.blogspot.com",maxResults:10,numChars:270,thumbWidth:140,thumbHeight:95,navText:"Tampilkan artikel selanjutnya &#9660;",resetToc:"Kembali ke Awal",noImage:"http://2.bp.blogspot.com/-11FkySHGB5Y/TpZ6SSbsF2I/AAAAAAAAA94/zK10UaL7jgo/s1600/images.jpeg",loading:"<span>Memuat...</span>",counting:"<div>Memuat artikel...</div>",searching:"<span>Mencari...</span>"},w window,d=document,el=function(id){return d.getElementById(id);},o={a:el('feed-order'),b:el('label-sorter').parentNode,c:el('post-searcher'),d:el('feed-q'),e:el('result-desc'),f:el('feed-container'),g:el('feed-nav'),h:d.getElementsByTagName('head')[0],i:0,j:null,k:'published',l:0,m:""},fn={a:function(){old=el('temporer-script');old.parentNode.removeChild(old);},b:function(param){var script=d.createElement('script');script.type="text/javascript";script.id="temporer-script";script.src=param;if(el('temporer-script'))fn.a();o.h.appendChild(script);},c:function(mode,tag,order){o.i++;o.e.innerHTML=cfg.counting;o.g.innerHTML=cfg[mode==1?"searching":"loading"];if(mode===0){fn.b(tag!==null?cfg.homePage+'/feeds/posts/summary/-/'+ tag+'?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&orderby='+ order+'&callback=loadToc':cfg.homePage+'/feeds/posts/summary?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&orderby='+ order+'&callback=loadToc');}else if(mode==1){fn.b(cfg.homePage+'/feeds/posts/summary?alt=json-in-script&start-index='+((o.i*cfg.maxResults)+ 1)+'&max-results='+ cfg.maxResults+'&q='+ tag+'&orderby='+ order+'&callback=loadToc');}
-o.j=(tag!==null)?tag:null;o.l=mode;o.a.disabled=true;o.b.children[0].disabled=true;},d:function(json){var _h;o.g.innerHTML="";o.e.innerHTML=o.l==1?'<span>Hasil penelusuran untuk kata kunci <b>&#8220;'+ o.m+'&#8221;</b> ('+ json.feed.openSearch$totalResults.$t+' Hasil)</span>':'<div>Total: '+ json.feed.openSearch$totalResults.$t+' Artikel</div>';if("entry"in json.feed){var a=json.feed.entry,b,c,_d,e="0 Komentar",f="",g;for(var i=0;i<cfg.maxResults;i++){if(i==a.length)break;b=a[i].title.$t;_d=("summary"in a[i])?a[i].summary.$t.replace(/<br ?\/?>/ig," ").replace(/<(.*?)>/g,"").replace(/<iframe/ig,"").substring(0,cfg.numChars):"";g=("media$thumbnail"in a[i])?a[i].media$thumbnail.url.replace(/\/s[0-9]+\-c/,"\/s"+ cfg.thumbWidth+""):cfg.noImage.replace(/\/s[0-9]+\-c/,"\/s"+ cfg.thumbWidth+"");for(var j=0,jen=a[i].link.length;j<jen;j++){c=(a[i].link[j].rel=="alternate")?a[i].link[j].href:"#";}
-for(var k=0,ken=a[i].link.length;k<ken;k++){if(a[i].link[k].rel=="replies"&&a[i].link[k].type=="text/html"){e=a[i].link[k].title;break;}}
-_h=d.createElement('li');_h.innerHTML='<div class="inner"><img style="width:'+ cfg.thumbWidth+'px;height:'+ cfg.thumbHeight+'px;" src="'+ g+'" alt="'+ b+'"><a class="toc-title" href="'+ c+'" target="_blank" title="'+ b+'">'+ b+'</a><div class="news-text">'+ _d+'&hellip;<br style="clear:both;"></div></div>';o.f.appendChild(_h);}
-_h=d.createElement('a');_h.href='#load-more';_h.innerHTML=cfg.navText;_h.onclick=function(){fn.c(o.l,o.j,o.k);return false;};}else{_h=d.createElement('a');_h.href='#reset-content';_h.innerHTML=cfg.resetToc;_h.onclick=function(){o.i=-1;o.e.innerHTML=cfg.counting;o.f.innerHTML="";fn.c(0,null,'published');o.a.innerHTML=o.a.innerHTML;o.b.children[0].innerHTML=o.b.children[0].innerHTML;return false;};}
-o.g.appendChild(_h);o.a.disabled=false;o.b.children[0].disabled=false;},e:function(json){var a=json.feed.category,b='<select id="label-sorter"><option value="" selected disabled>Pilih Kategori...</option>';for(var i=0,len=a.length;i<len;i++){b+='<option value="'+ encodeURIComponent(a[i].term)+'">'+ encodeURIComponent(a[i].term)+'</option>';}
-b+='</select>';o.b.innerHTML=b;o.b.children[0].onchange=function(){o.i=-1;o.f.innerHTML="";o.g.innerHTML=cfg.loading;fn.c(0,this.value,o.k);};}};loadToc=fn.d;loadCategories=fn.e;fn.b(cfg.homePage+'/feeds/posts/summary?alt=json-in-script&start-index='+(o.i+ 1)+'&max-results='+ cfg.maxResults+'&orderby=published&callback=loadToc');fn.b(cfg.homePage+'/feeds/posts/summary?alt=json-in-script&max-results=0&orderby=published&callback=loadCategories');o.a.onchange=function(){o.i=-1;o.f.innerHTML="";o.g.innerHTML=cfg.counting;o.b.children[0].innerHTML=o.b.children[0].innerHTML;fn.c(0,null,this.value);o.k=this.value;};o.c.onsubmit=function(){o.i=-1;o.f.innerHTML="";o.m=o.d.value;fn.c(1,o.d.value,o.k);return false;};}};_toc.init();
-</script>
+<br />
+<header id="resultDesc"></header>
+<br />
+<ul id="feedContainer"></ul>
+<div id="feedNav">
+Loading...</div>
+<script src="https://cdn.rawgit.com/nazmudin/daftarisi/gh-pages/js.js" type="text/javascript"></script>
+<style scoped="" type="text/css">
+#comments {display:none;}
+</style>
+<style>
+  /* CSS Sitemap */
+#table-outer table{width:100%;margin:0;padding:0}
+#table-outer input,#table-outer select{padding:4px;font:inherit;border:2px solid #ecf0f1;width:170px;box-sizing:border-box}
+#table-outer select{cursor:pointer;outline:none}
+#table-outer input:focus{outline:none}
+#resultDesc{margin-bottom:10px}
+#feedContainer{overflow:hidden;margin-top:20px}
+#feedContainer strong{font-size:10px}
+#feedContainer,#feedContainer li{padding:0;margin:0;list-style:none}
+#feedContainer li{float:left;width:50%;margin-bottom:10px;position:relative;z-index:0}
+#feedContainer .inner{padding:8px;margin:0 5px;position:relative;background-color:#fff;border:1px solid #f9f9f9;height:133px}
+#feedContainer img{float:left;margin:0 8px 0 0;max-width:100%;border:1px solid #f9f9f9;padding:2px}
+#feedContainer .toc-title{max-height:33px;overflow:hidden}
+#feedContainer .toc-title:hover{text-decoration:underline}
+#feedContainer .news-text{font-size:11px}
+#feedNav a,#feedNav span{display:block;text-align:center;color:#fff;text-decoration:none;background-color:#444;padding:5px;width:95%;margin:0 auto;transition:all 0.3s linear}
+#feedNav a,#feedNav span:hover{background-color:#333;transition:all 0.3s linear}
+#feedContainer .date{display:none;position:absolute;bottom:0;right:0;background-color:transparent;color:#fff;font-size:9px;padding:3px 2px;width:35px}
+#feedContainer .date .dd{font-size:9px;line-height:5px;font-weight:bold}
+#feedContainer .date span{display:inline-block;line-height:5px;text-align:center;margin-left:5px}
+</style> 
