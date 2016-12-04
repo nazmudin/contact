@@ -1,7 +1,7 @@
 var tocConfig = {
     url: "https://theencoding.blogspot.com",
     feedNum: 6,
-    labelName: (window.location.hash && window.location.hash != "#0" && window.location.hash != "#search") ? encodeURIComponent(window.location.hash.substr(1)) : false,
+    labelName: (window.location.hash && window.location.hash != "#1" && window.location.hash != "#search") ? encodeURIComponent(window.location.hash.substr(1)) : false,
     numChars: 140,
     thumbWidth: 70,
     navText: "Load More &#9660;",
