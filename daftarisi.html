@@ -13,6 +13,22 @@
 <ul id="feedContainer"></ul>
 <div id="feedNav">
 Loading...</div>
+<script>
+var tocConfig = {
+  url: "theencoding.blogspot.com",
+  feedNum: 6,
+  labelName: (window.location.hash && window.location.hash != "#0" && window.location.hash != "#search") ? encodeURIComponent(window.location.hash.substr(1)) : false,
+  numChars: 140,
+  thumbWidth: 70,
+  navText: "Load More &#9660;",
+  frontText: "Top &uArr;",
+  noImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAA3NCSVQICAjb4U/gAAAADElEQVQImWOor68HAAL+AX7vOF2TAAAAAElFTkSuQmCC",
+  loading: "<span>Loading...</span>",
+  searching: "<span>Searching...</span>",
+  MonthNames: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+  noResult: "No Result"
+};
+</script>
 <script src="https://cdn.rawgit.com/nazmudin/daftarisi/gh-pages/js.js" type="text/javascript"></script>
 <style scoped="" type="text/css">
 #comments {display:none;}
